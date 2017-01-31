@@ -1,8 +1,8 @@
-﻿using AlgoritmoGeneticoAutoevolutivo.BaseGeneticAlgorithm.Interface.Problem;
+﻿using MetaEvolutionaryGeneticAlgorithm.BaseGeneticAlgorithm.Interface.Problem;
 
-namespace AlgoritmoGeneticoAutoevolutivo.Implementations.Autoevolutionary.FitnessMAtcher.Interface
+namespace MetaEvolutionaryGeneticAlgorithm.Implementations.Autoevolutionary.FitnessMAtcher.Interface
 {
-    interface IAutoEvolutionaryFitnessMatcher
+    public interface IAutoEvolutionaryFitnessMatcher
     {
         float Match(IFitness fitness1, IFitness fitness2);
     }

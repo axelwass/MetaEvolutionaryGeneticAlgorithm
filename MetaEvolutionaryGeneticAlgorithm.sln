@@ -5,6 +5,11 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetaEvolutionaryGeneticAlgorithm", "MetaEvolutionaryGeneticAlgorithm\MetaEvolutionaryGeneticAlgorithm.csproj", "{087431BD-CC8B-42D2-8D3E-787EE40F6268}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExapleApplication", "ExapleApplication\ExapleApplication.csproj", "{67E39B29-68FE-494D-A43F-1ED1EAC7A01C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{087431BD-CC8B-42D2-8D3E-787EE40F6268} = {087431BD-CC8B-42D2-8D3E-787EE40F6268}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +20,10 @@ Global
 		{087431BD-CC8B-42D2-8D3E-787EE40F6268}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{087431BD-CC8B-42D2-8D3E-787EE40F6268}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{087431BD-CC8B-42D2-8D3E-787EE40F6268}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67E39B29-68FE-494D-A43F-1ED1EAC7A01C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67E39B29-68FE-494D-A43F-1ED1EAC7A01C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67E39B29-68FE-494D-A43F-1ED1EAC7A01C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67E39B29-68FE-494D-A43F-1ED1EAC7A01C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

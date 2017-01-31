@@ -1,14 +1,14 @@
-﻿using AlgoritmoGeneticoAutoevolutivo.Implementations.Autoevolutionary.FitnessMAtcher.Interface;
+﻿using MetaEvolutionaryGeneticAlgorithm.Implementations.Autoevolutionary.FitnessMAtcher.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AlgoritmoGeneticoAutoevolutivo.BaseGeneticAlgorithm;
+using MetaEvolutionaryGeneticAlgorithm.BaseGeneticAlgorithm;
 
-namespace AlgoritmoGeneticoAutoevolutivo.Implementations.Autoevolutionary.FitnessMatchers.DefaultImplementation
+namespace MetaEvolutionaryGeneticAlgorithm.Implementations.Autoevolutionary.FitnessMatchers.DefaultImplementation
 {
-    class AutoevolutionaryFitnessMatcherDefaultImplementationFabrik : IAutoEvolutionaryFitnessMatcherFabrik<AutoevolutionaryFitnessMatcherDefaultImplementation>
+    public class AutoevolutionaryFitnessMatcherDefaultImplementationFabrik : IAutoEvolutionaryFitnessMatcherFabrik<AutoevolutionaryFitnessMatcherDefaultImplementation>
     {
         public AutoevolutionaryFitnessMatcherDefaultImplementation Create(List<Gen> gens)
         {

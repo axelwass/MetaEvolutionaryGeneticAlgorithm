@@ -4,15 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{087431BD-CC8B-42D2-8D3E-787EE40F6268}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{67E39B29-68FE-494D-A43F-1ED1EAC7A01C}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AlgoritmoGeneticoAutoevolutivo</RootNamespace>
-    <AssemblyName>AlgoritmoGeneticoAutoevolutivo</AssemblyName>
+    <RootNamespace>ExapleApplication</RootNamespace>
+    <AssemblyName>ExapleApplication</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -30,8 +33,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MoreLinq, Version=1.4.18916.0, Culture=neutral, PublicKeyToken=384d532d7e88985d, processorArchitecture=MSIL">
-      <HintPath>..\packages\morelinq.1.4.0\lib\net35\MoreLinq.dll</HintPath>
+    <Reference Include="MoreLinq, Version=2.0.20029.0, Culture=neutral, PublicKeyToken=384d532d7e88985d, processorArchitecture=MSIL">
+      <HintPath>..\packages\morelinq.2.0.0\lib\net35\MoreLinq.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -44,32 +47,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\Arrays.cs" />
-    <Compile Include="Common\IListExtensions.cs" />
-    <Compile Include="Common\RandomGenerator.cs" />
-    <Compile Include="Implementations\Autoevolutionary\FitnessMatchers\DefaultImplementation\AutoevolutionaryFitnessMatcherDefaultImplementation.cs" />
-    <Compile Include="Implementations\Autoevolutionary\FitnessMatchers\DefaultImplementation\AutoevolutionaryFitnessMatcherDefaultImplementationFabrik.cs" />
-    <Compile Include="Implementations\Autoevolutionary\FitnessMatchers\Interface\IAutoEvolutionaryFitnessMatcherFabrik.cs" />
-    <Compile Include="Implementations\Autoevolutionary\AutoEvolutionaryGeneticAlgorithm.cs" />
-    <Compile Include="Implementations\Autoevolutionary\AutoEvolutionaryGenomeWarper.cs" />
-    <Compile Include="Implementations\Autoevolutionary\AutoevolutionaryInformation.cs" />
-    <Compile Include="Implementations\Autoevolutionary\AutoEvolutionaryInformationFabrik.cs" />
-    <Compile Include="Implementations\Autoevolutionary\FitnessMatchers\Interface\IAutoEvolutionaryFitnessMatcher.cs" />
-    <Compile Include="BaseGeneticAlgorithm\Interface\GA\AGeneticAlgorithm.cs" />
-    <Compile Include="BaseGeneticAlgorithm\Interface\Problem\IEvaluationScenarioGenerator.cs" />
-    <Compile Include="BaseGeneticAlgorithm\Interface\Problem\IFitness.cs" />
-    <Compile Include="BaseGeneticAlgorithm\Gen.cs" />
-    <Compile Include="BaseGeneticAlgorithm\GenDescriptor.cs" />
-    <Compile Include="BaseGeneticAlgorithm\Genome.cs" />
-    <Compile Include="BaseGeneticAlgorithm\Interface\Problem\IEvaluationScenario.cs" />
-    <Compile Include="BaseGeneticAlgorithm\Interface\GA\IGenomeWarper.cs" />
-    <Compile Include="BaseGeneticAlgorithm\Interface\Problem\IIndividualFabrik.cs" />
+    <Compile Include="Examples\TravelSalesman\TravelSalesmanFitness.cs" />
+    <Compile Include="Examples\TravelSalesman\TravelSalesmanIndividual.cs" />
+    <Compile Include="Examples\TravelSalesman\TravelSalesmanIndividualFabrik.cs" />
+    <Compile Include="Examples\TravelSalesman\TravelSalesmanScenario.cs" />
+    <Compile Include="Examples\TravelSalesman\TravelSalesmanScenarioGenerator.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\MetaEvolutionaryGeneticAlgorithm\MetaEvolutionaryGeneticAlgorithm.csproj">
+      <Project>{087431bd-cc8b-42d2-8d3e-787ee40f6268}</Project>
+      <Name>MetaEvolutionaryGeneticAlgorithm</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

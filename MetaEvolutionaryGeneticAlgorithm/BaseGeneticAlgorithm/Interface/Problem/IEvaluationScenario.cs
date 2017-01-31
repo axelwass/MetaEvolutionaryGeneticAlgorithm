@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AlgoritmoGeneticoAutoevolutivo.BaseGeneticAlgorithm.Interface.Problem
+namespace MetaEvolutionaryGeneticAlgorithm.BaseGeneticAlgorithm.Interface.Problem
 {
-    interface IEvaluationScenario<T>
+    public interface IEvaluationScenario<T>
     {
 
         IFitness Evaluate(T individuo);

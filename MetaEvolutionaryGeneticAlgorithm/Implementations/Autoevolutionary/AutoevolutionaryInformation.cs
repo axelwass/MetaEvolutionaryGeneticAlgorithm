@@ -1,8 +1,8 @@
-﻿using AlgoritmoGeneticoAutoevolutivo.Implementations.Autoevolutionary.FitnessMAtcher.Interface;
+﻿using MetaEvolutionaryGeneticAlgorithm.Implementations.Autoevolutionary.FitnessMAtcher.Interface;
 
-namespace AlgoritmoGeneticoAutoevolutivo.Implementations.Autoevolutionary
+namespace MetaEvolutionaryGeneticAlgorithm.Implementations.Autoevolutionary
 {
-    class AutoevolutionaryInformation
+    public class AutoevolutionaryInformation
     {
         public IAutoEvolutionaryFitnessMatcher FitnessMatcher { get; }
         public float MutateGenChooseProbability { get; }

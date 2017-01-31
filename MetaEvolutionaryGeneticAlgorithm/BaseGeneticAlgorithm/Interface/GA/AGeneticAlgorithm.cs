@@ -1,11 +1,11 @@
-﻿using AlgoritmoGeneticoAutoevolutivo.BaseGeneticAlgorithm.Interface.Problem;
+﻿using MetaEvolutionaryGeneticAlgorithm.BaseGeneticAlgorithm.Interface.Problem;
 using System.Collections.Generic;
 
-namespace AlgoritmoGeneticoAutoevolutivo.BaseGeneticAlgorithm.Interface.GA
+namespace MetaEvolutionaryGeneticAlgorithm.BaseGeneticAlgorithm.Interface.GA
 {
-    abstract class AGeneticAlgorithm<T, V> where V:IGenomeWarper<T, V>
+    public abstract class AGeneticAlgorithm<T, V> where V:IGenomeWarper<T, V>
     {
-        protected int GenerationNumber;
+        public int GenerationNumber;
         protected IIndividualFabrik<T> IndividualFabrik;
         protected IEvaluationScenarioGenerator<T> ScenarioGeneratior;
 

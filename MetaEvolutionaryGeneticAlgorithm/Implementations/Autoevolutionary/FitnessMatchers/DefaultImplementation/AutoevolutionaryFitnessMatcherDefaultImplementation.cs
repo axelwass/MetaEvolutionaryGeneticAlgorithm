@@ -1,14 +1,14 @@
-﻿using AlgoritmoGeneticoAutoevolutivo.Implementations.Autoevolutionary.FitnessMAtcher.Interface;
+﻿using MetaEvolutionaryGeneticAlgorithm.Implementations.Autoevolutionary.FitnessMAtcher.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AlgoritmoGeneticoAutoevolutivo.BaseGeneticAlgorithm.Interface.Problem;
+using MetaEvolutionaryGeneticAlgorithm.BaseGeneticAlgorithm.Interface.Problem;
 
-namespace AlgoritmoGeneticoAutoevolutivo.Implementations.Autoevolutionary.FitnessMatchers.DefaultImplementation
+namespace MetaEvolutionaryGeneticAlgorithm.Implementations.Autoevolutionary.FitnessMatchers.DefaultImplementation
 {
-    class AutoevolutionaryFitnessMatcherDefaultImplementation : IAutoEvolutionaryFitnessMatcher
+    public class AutoevolutionaryFitnessMatcherDefaultImplementation : IAutoEvolutionaryFitnessMatcher
     {
         public float Match(IFitness fitness1, IFitness fitness2)
         {

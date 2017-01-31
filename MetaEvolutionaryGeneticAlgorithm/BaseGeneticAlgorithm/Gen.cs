@@ -1,7 +1,7 @@
 ﻿
-namespace AlgoritmoGeneticoAutoevolutivo.BaseGeneticAlgorithm
+namespace MetaEvolutionaryGeneticAlgorithm.BaseGeneticAlgorithm
 {
-    class Gen
+    public class Gen
     {
         public float Value { get; private set; }
         GenDescriptor Descriptor;

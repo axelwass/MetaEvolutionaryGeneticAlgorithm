@@ -1,9 +1,9 @@
-﻿using AlgoritmoGeneticoAutoevolutivo.BaseGeneticAlgorithm.Interface.Problem;
+﻿using MetaEvolutionaryGeneticAlgorithm.BaseGeneticAlgorithm.Interface.Problem;
 using System.Collections.Generic;
 
-namespace AlgoritmoGeneticoAutoevolutivo.BaseGeneticAlgorithm.Interface.GA
+namespace MetaEvolutionaryGeneticAlgorithm.BaseGeneticAlgorithm.Interface.GA
 {
-    interface IGenomeWarper<T, U> where U : IGenomeWarper<T,U>
+    public interface IGenomeWarper<T, U> where U : IGenomeWarper<T,U>
     {
         List<Genome> Apariate(U other);
         void Challange(IEvaluationScenario<T> evalluationScenario);

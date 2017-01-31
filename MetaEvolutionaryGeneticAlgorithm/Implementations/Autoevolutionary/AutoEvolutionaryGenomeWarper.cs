@@ -1,22 +1,23 @@
-﻿using AlgoritmoGeneticoAutoevolutivo.BaseGeneticAlgorithm;
+﻿using MetaEvolutionaryGeneticAlgorithm.BaseGeneticAlgorithm;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using MoreLinq;
-using AlgoritmoGeneticoAutoevolutivo.BaseGeneticAlgorithm.Interface.GA;
-using AlgoritmoGeneticoAutoevolutivo.BaseGeneticAlgorithm.Interface.Problem;
+using MetaEvolutionaryGeneticAlgorithm.BaseGeneticAlgorithm.Interface.GA;
+using MetaEvolutionaryGeneticAlgorithm.BaseGeneticAlgorithm.Interface.Problem;
+using MetaEvolutionaryGeneticAlgorithm.Implementations.Autoevolutionary.FitnessMAtcher.Interface;
 
-namespace AlgoritmoGeneticoAutoevolutivo.Implementations.Autoevolutionary
+namespace MetaEvolutionaryGeneticAlgorithm.Implementations.Autoevolutionary
 {
-    class AutoEvolutionaryGenomeWarper<T> : IGenomeWarper<T, AutoEvolutionaryGenomeWarper<T>>
+    public class AutoEvolutionaryGenomeWarper<T, U> : IGenomeWarper<T, AutoEvolutionaryGenomeWarper<T,U>> where U : IAutoEvolutionaryFitnessMatcher
     {
         int Lives;
         IFitness Fitness;
         Genome WarpedGenome;
-        T Individual;
+        public T Individual;
         AutoevolutionaryInformation EvolutionInformtaion;
 
-        public AutoEvolutionaryGenomeWarper(IIndividualFabrik<T> individualFabrik, AutoEvolutionaryInformationFabrik autoEvolutionaryInformationFabrik, Genome genome, int initialLives)
+        public AutoEvolutionaryGenomeWarper(IIndividualFabrik<T> individualFabrik, AutoEvolutionaryInformationFabrik<U> autoEvolutionaryInformationFabrik, Genome genome, int initialLives)
         {
             WarpedGenome = genome;
             Individual = individualFabrik.Create(WarpedGenome.GetGens().Take(individualFabrik.GetGenCount()).ToList());
@@ -41,15 +42,15 @@ namespace AlgoritmoGeneticoAutoevolutivo.Implementations.Autoevolutionary
 
         public float getNormalizedFitness()
         {
-            return Fitness.GetNormalized();
+            return Fitness != null? Fitness.GetNormalized() : 0;
         }
 
-        public AutoEvolutionaryGenomeWarper<T> ChooseMate(List<AutoEvolutionaryGenomeWarper<T>> others)
+        public AutoEvolutionaryGenomeWarper<T,U> ChooseMate(List<AutoEvolutionaryGenomeWarper<T,U>> others)
         {
             return others.MaxBy(o => EvolutionInformtaion.FitnessMatcher.Match(Fitness, o.Fitness));
         }
 
-        public List<Genome> Apariate(AutoEvolutionaryGenomeWarper<T> other)
+        public List<Genome> Apariate(AutoEvolutionaryGenomeWarper<T,U> other)
         {
             var newGenome = WarpedGenome.Apariate(0, other.WarpedGenome, EvolutionInformtaion.ApariateGenDominancePorcentage);
             newGenome = newGenome.Mutate(0, EvolutionInformtaion.MutateGenChooseProbability, EvolutionInformtaion.MutateGenAmplitudePorcentage);

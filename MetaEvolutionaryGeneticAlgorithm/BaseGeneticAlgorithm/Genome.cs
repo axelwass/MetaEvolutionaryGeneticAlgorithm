@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace AlgoritmoGeneticoAutoevolutivo.BaseGeneticAlgorithm
+namespace MetaEvolutionaryGeneticAlgorithm.BaseGeneticAlgorithm
 {
-    class Genome
+    public class Genome
     {
         List<Gen> Gens;
         List<GenDescriptor> Descriptors;

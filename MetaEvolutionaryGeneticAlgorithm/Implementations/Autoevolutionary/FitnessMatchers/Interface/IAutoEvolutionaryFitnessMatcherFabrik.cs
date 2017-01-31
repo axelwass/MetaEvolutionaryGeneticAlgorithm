@@ -1,8 +1,8 @@
-﻿using AlgoritmoGeneticoAutoevolutivo.BaseGeneticAlgorithm.Interface.Problem;
+﻿using MetaEvolutionaryGeneticAlgorithm.BaseGeneticAlgorithm.Interface.Problem;
 
-namespace AlgoritmoGeneticoAutoevolutivo.Implementations.Autoevolutionary.FitnessMAtcher.Interface
+namespace MetaEvolutionaryGeneticAlgorithm.Implementations.Autoevolutionary.FitnessMAtcher.Interface
 {
-    interface IAutoEvolutionaryFitnessMatcherFabrik<T> : IIndividualFabrik<T> where T : IAutoEvolutionaryFitnessMatcher
+    public interface IAutoEvolutionaryFitnessMatcherFabrik<T> : IIndividualFabrik<T> where T : IAutoEvolutionaryFitnessMatcher
     {
     }
 }

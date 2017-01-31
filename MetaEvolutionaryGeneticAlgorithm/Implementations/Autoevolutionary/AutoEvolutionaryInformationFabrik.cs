@@ -1,17 +1,17 @@
-﻿using AlgoritmoGeneticoAutoevolutivo.BaseGeneticAlgorithm;
-using AlgoritmoGeneticoAutoevolutivo.BaseGeneticAlgorithm.Interface.Problem;
-using AlgoritmoGeneticoAutoevolutivo.Implementations.Autoevolutionary.FitnessMAtcher.Interface;
+﻿using MetaEvolutionaryGeneticAlgorithm.BaseGeneticAlgorithm;
+using MetaEvolutionaryGeneticAlgorithm.BaseGeneticAlgorithm.Interface.Problem;
+using MetaEvolutionaryGeneticAlgorithm.Implementations.Autoevolutionary.FitnessMAtcher.Interface;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace AlgoritmoGeneticoAutoevolutivo.Implementations.Autoevolutionary
+namespace MetaEvolutionaryGeneticAlgorithm.Implementations.Autoevolutionary
 {
-    class AutoEvolutionaryInformationFabrik : IIndividualFabrik<AutoevolutionaryInformation>
+    public class AutoEvolutionaryInformationFabrik<T> : IIndividualFabrik<AutoevolutionaryInformation> where T : IAutoEvolutionaryFitnessMatcher
     {
-        IAutoEvolutionaryFitnessMatcherFabrik<IAutoEvolutionaryFitnessMatcher> FitnessMatcherFabrik;
+        IAutoEvolutionaryFitnessMatcherFabrik<T> FitnessMatcherFabrik;
         List<GenDescriptor> AutoEvolutionaryInformationGeneticDescriptor = new List<GenDescriptor> { new GenDescriptor(0, 1), new GenDescriptor(0, 1), new GenDescriptor(0, 1) };
 
-        AutoEvolutionaryInformationFabrik(IAutoEvolutionaryFitnessMatcherFabrik<IAutoEvolutionaryFitnessMatcher> fitnessMatcherFabrik)
+        public AutoEvolutionaryInformationFabrik(IAutoEvolutionaryFitnessMatcherFabrik<T> fitnessMatcherFabrik)
         {
             FitnessMatcherFabrik = fitnessMatcherFabrik;
         }

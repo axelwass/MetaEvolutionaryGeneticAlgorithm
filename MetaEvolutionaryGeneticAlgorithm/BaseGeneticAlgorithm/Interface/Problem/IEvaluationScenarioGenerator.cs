@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AlgoritmoGeneticoAutoevolutivo.BaseGeneticAlgorithm.Interface.Problem
+namespace MetaEvolutionaryGeneticAlgorithm.BaseGeneticAlgorithm.Interface.Problem
 {
-    interface IEvaluationScenarioGenerator<T>
+    public interface IEvaluationScenarioGenerator<T>
     {
         IEvaluationScenario<T> GenerateEvaluationScenario();
     }
