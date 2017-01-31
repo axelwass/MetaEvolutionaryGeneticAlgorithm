@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{087431BD-CC8B-42D2-8D3E-787EE40F6268}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AlgoritmoGeneticoAutoevolutivo</RootNamespace>
+    <AssemblyName>AlgoritmoGeneticoAutoevolutivo</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MoreLinq, Version=1.4.18916.0, Culture=neutral, PublicKeyToken=384d532d7e88985d, processorArchitecture=MSIL">
+      <HintPath>..\packages\morelinq.1.4.0\lib\net35\MoreLinq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Implementations\Autoevolutionary\FitnessMatchers\DefaultImplementation\AutoevolutionaryFitnessMatcherDefaultImplementation.cs" />
+    <Compile Include="Implementations\Autoevolutionary\FitnessMatchers\DefaultImplementation\AutoevolutionaryFitnessMatcherDefaultImplementationFabrik.cs" />
+    <Compile Include="Implementations\Autoevolutionary\FitnessMatchers\Interface\IAutoEvolutionaryFitnessMatcherFabrik.cs" />
+    <Compile Include="Implementations\Autoevolutionary\AutoEvolutionaryGeneticAlgorithm.cs" />
+    <Compile Include="Implementations\Autoevolutionary\AutoEvolutionaryGenomeWarper.cs" />
+    <Compile Include="Implementations\Autoevolutionary\AutoevolutionaryInformation.cs" />
+    <Compile Include="Implementations\Autoevolutionary\AutoEvolutionaryInformationFabrik.cs" />
+    <Compile Include="Implementations\Autoevolutionary\FitnessMatchers\Interface\IAutoEvolutionaryFitnessMatcher.cs" />
+    <Compile Include="BaseGeneticAlgorithm\Interface\GA\AGeneticAlgorithm.cs" />
+    <Compile Include="BaseGeneticAlgorithm\Interface\Problem\IEvaluationScenarioGenerator.cs" />
+    <Compile Include="BaseGeneticAlgorithm\Interface\Problem\IFitness.cs" />
+    <Compile Include="BaseGeneticAlgorithm\Gen.cs" />
+    <Compile Include="BaseGeneticAlgorithm\GenDescriptor.cs" />
+    <Compile Include="BaseGeneticAlgorithm\Genome.cs" />
+    <Compile Include="BaseGeneticAlgorithm\Interface\Problem\IEvaluationScenario.cs" />
+    <Compile Include="BaseGeneticAlgorithm\Interface\GA\IGenomeWarper.cs" />
+    <Compile Include="BaseGeneticAlgorithm\Interface\Problem\IIndividualFabrik.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
