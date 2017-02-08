@@ -40,7 +40,7 @@ namespace ExapleApplication.Examples.TravelSalesman
             var gens = new List<GenDescriptor>();
             for (int i = 0; i < Nodes; i++)
             {
-                gens.Add(new GenDescriptor("Node sort order field",0, 1));
+                gens.Add(new GenDescriptor("Node sort order field",0, 1, 0.0001f));
             }
             return gens;
         }

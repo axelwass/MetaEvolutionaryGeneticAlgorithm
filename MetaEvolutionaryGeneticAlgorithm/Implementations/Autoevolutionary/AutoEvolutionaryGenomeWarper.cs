@@ -12,8 +12,8 @@ namespace MetaEvolutionaryGeneticAlgorithm.Implementations.Autoevolutionary
     public class AutoEvolutionaryGenomeWarper<T, U> : IGenomeWarper<T, AutoEvolutionaryGenomeWarper<T,U>> where U : IAutoEvolutionaryFitnessMatcher
     {
         int Lives;
-        IFitness Fitness;
-        Genome WarpedGenome;
+        public IFitness Fitness;
+        public Genome WarpedGenome;
         public T Individual;
         public AutoevolutionaryInformation EvolutionInformtaion;
 
@@ -52,9 +52,14 @@ namespace MetaEvolutionaryGeneticAlgorithm.Implementations.Autoevolutionary
 
         public List<Genome> Apariate(AutoEvolutionaryGenomeWarper<T,U> other)
         {
-            var newGenome = WarpedGenome.Apariate(0, other.WarpedGenome, EvolutionInformtaion.ApariateGenDominancePorcentage);
-            newGenome = newGenome.Mutate(EvolutionInformtaion.GetMutationType(), EvolutionInformtaion.MutateGenChooseProbability, EvolutionInformtaion.MutateGenAmplitudePorcentage);
-            return new List<Genome> { newGenome };
+            List<Genome> children = new List<Genome>();
+            for(int i=0; i<3; i++)
+            {
+                var child = WarpedGenome.Apariate(0, other.WarpedGenome, EvolutionInformtaion.ApariateGenDominancePorcentage);
+                child = child.Mutate(EvolutionInformtaion.GetMutationType(), EvolutionInformtaion.MutateGenChooseProbability, EvolutionInformtaion.MutateGenAmplitudePorcentage);
+                children.Add(child);
+            }
+            return children;
         }
     }
 }

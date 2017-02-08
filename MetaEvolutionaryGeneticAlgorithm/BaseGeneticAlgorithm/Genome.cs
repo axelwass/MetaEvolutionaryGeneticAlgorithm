@@ -1,6 +1,7 @@
 ﻿using AlgoritmoGeneticoAutoevolutivo.GeneticOperators.Mutation;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace MetaEvolutionaryGeneticAlgorithm.BaseGeneticAlgorithm
 {
@@ -32,6 +33,17 @@ namespace MetaEvolutionaryGeneticAlgorithm.BaseGeneticAlgorithm
             return Gens;
         }
 
+        internal bool MatchGenome(Genome other)
+        {
+            for(int i = 0; i < Gens.Count; i++)
+            {
+                if(Gens[i].Value - other.Gens[i].Value > Descriptors[i].Epsilon)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 
 }

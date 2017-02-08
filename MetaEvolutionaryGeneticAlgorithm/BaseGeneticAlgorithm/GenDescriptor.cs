@@ -7,13 +7,15 @@ namespace MetaEvolutionaryGeneticAlgorithm.BaseGeneticAlgorithm
     {
         public float Min;
         public float Max;
+        public float Epsilon;
         public string Desc;
 
-        public GenDescriptor(string desc,float min, float max)
+        public GenDescriptor(string desc,float min, float max, float epsilon)
         {
             Min = min;
             Max = max;
             Desc = desc;
+            Epsilon = epsilon;
         }
 
         public float GetRandom()

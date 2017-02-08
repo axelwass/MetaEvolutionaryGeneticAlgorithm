@@ -2,6 +2,7 @@
 using MetaEvolutionaryGeneticAlgorithm.BaseGeneticAlgorithm.Interface.Problem;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,6 +31,13 @@ namespace ExampleApplication.Examples.TravelSalesman
 
             Individual = new TravelSalesmanScenario(DistancesVector, maxPathLength);
         }
+
+        public TravelSalesmanScenarioGenerator(float[,] DistancesVector, int nodes, float maxPathLength)
+        {
+            Nodes = nodes;
+            Individual = new TravelSalesmanScenario(DistancesVector, maxPathLength);
+        }
+
 
         public IEvaluationScenario<TravelSalesmanIndividual> GenerateEvaluationScenario()
         {

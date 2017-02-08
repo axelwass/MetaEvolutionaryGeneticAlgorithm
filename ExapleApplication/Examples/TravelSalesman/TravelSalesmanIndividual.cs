@@ -26,7 +26,9 @@ namespace ExampleApplication.Examples.TravelSalesman
                 totalDistance += distanceVector[travelOrder[i], travelOrder[i + 1]];
             }
 
-            return new TravelSalesmanFitness( 1 - totalDistance / ((travelOrder.Count - 1) * maxPathLength));
+            //totalDistance += distanceVector[travelOrder[0], travelOrder[travelOrder.Count - 1]];
+
+            return new TravelSalesmanFitness(totalDistance, travelOrder.Count, maxPathLength);
         }
     }
 }

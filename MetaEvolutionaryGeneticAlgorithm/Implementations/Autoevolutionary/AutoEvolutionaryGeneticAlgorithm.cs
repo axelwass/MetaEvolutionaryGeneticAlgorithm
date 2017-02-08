@@ -90,8 +90,9 @@ namespace MetaEvolutionaryGeneticAlgorithm.Implementations.Autoevolutionary
             foreach (var g in Generation)
             {
                 var mate = g.ChooseMate(Generation.OrderBy(x => RandomGenerator.GetInstance().GetRandom(0,1)).Take(5).ToList());
+                var childs = g.Apariate(mate).Where(child => !(child.MatchGenome(g.WarpedGenome) || child.MatchGenome(mate.WarpedGenome)));
                 newGeneration.AddRange(
-                    g.Apariate(mate).Select(genome => new AutoEvolutionaryGenomeWarper<T,U>(IndividualFabrik,EvolutionaryInformationFabrik, genome, InitialLives))
+                    childs.Select(genome => new AutoEvolutionaryGenomeWarper<T,U>(IndividualFabrik,EvolutionaryInformationFabrik, genome, InitialLives))
                     );
             }
             Generation.AddRange(newGeneration);

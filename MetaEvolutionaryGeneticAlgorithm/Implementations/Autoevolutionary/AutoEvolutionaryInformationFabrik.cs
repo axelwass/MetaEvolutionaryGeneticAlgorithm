@@ -11,9 +11,9 @@ namespace MetaEvolutionaryGeneticAlgorithm.Implementations.Autoevolutionary
     {
         IAutoEvolutionaryFitnessMatcherFabrik<T> FitnessMatcherFabrik;
         List<GenDescriptor> AutoEvolutionaryInformationGeneticDescriptor = new List<GenDescriptor> {
-            new GenDescriptor("Mutation choose probability", 0, 1),
-            new GenDescriptor("Mutation amplitude porcentage", 0, 1),
-            new GenDescriptor("Apariate dominance porcentage",0, 1)
+            new GenDescriptor("Mutation choose probability", 0, 1, 0.0001f),
+            new GenDescriptor("Mutation amplitude porcentage", 0, 1, 0.0001f),
+            new GenDescriptor("Apariate dominance porcentage",0, 1, 0.0001f)
         };
 
         public AutoEvolutionaryInformationFabrik(IAutoEvolutionaryFitnessMatcherFabrik<T> fitnessMatcherFabrik)
@@ -24,7 +24,7 @@ namespace MetaEvolutionaryGeneticAlgorithm.Implementations.Autoevolutionary
         public List<GenDescriptor> GetGeneticDescriptor()
         {
             var descriptor = AutoEvolutionaryInformationGeneticDescriptor.ToList();
-            descriptor.AddRange(Enumerable.Repeat(new GenDescriptor("Mutation type prob",0, 1), MutationManager.GetInstance().GetMutationTypes()));
+            descriptor.AddRange(Enumerable.Repeat(new GenDescriptor("Mutation type prob",0, 1, 0.001f), MutationManager.GetInstance().GetMutationTypes()));
             descriptor.AddRange(FitnessMatcherFabrik.GetGeneticDescriptor());
             return descriptor;
         }

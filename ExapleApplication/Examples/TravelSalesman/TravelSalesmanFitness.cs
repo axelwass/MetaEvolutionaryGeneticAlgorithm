@@ -7,18 +7,22 @@ using System.Threading.Tasks;
 
 namespace ExampleApplication.Examples.TravelSalesman
 {
-    class TravelSalesmanFitness : IFitness
+    public class TravelSalesmanFitness : IFitness
     {
-        float Fitness;
-
-        public TravelSalesmanFitness(float fitness)
+        public float TotalDistance;
+        int TravelOrderCount;
+        float MaxPathLength;
+        
+        public TravelSalesmanFitness(float totalDistance, int travelOrderCount, float maxPathLength)
         {
-             Fitness = fitness;
+            MaxPathLength = maxPathLength;
+            TotalDistance = totalDistance;
+            TravelOrderCount = travelOrderCount;
         }
 
         public float GetNormalized()
         {
-            return Fitness;
+            return 1 - TotalDistance / ((TravelOrderCount - 1) * MaxPathLength);
         }
     }
 }
