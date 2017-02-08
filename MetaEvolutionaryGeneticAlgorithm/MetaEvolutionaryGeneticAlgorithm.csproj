@@ -47,6 +47,10 @@
     <Compile Include="Common\Arrays.cs" />
     <Compile Include="Common\IListExtensions.cs" />
     <Compile Include="Common\RandomGenerator.cs" />
+    <Compile Include="GeneticOperators\Mutation\Implementations\ClassicMutationResolver.cs" />
+    <Compile Include="GeneticOperators\Mutation\Implementations\SwapMutationResolver.cs" />
+    <Compile Include="GeneticOperators\Mutation\MutationManager.cs" />
+    <Compile Include="GeneticOperators\Mutation\IMutationResolver.cs" />
     <Compile Include="Implementations\Autoevolutionary\FitnessMatchers\DefaultImplementation\AutoevolutionaryFitnessMatcherDefaultImplementation.cs" />
     <Compile Include="Implementations\Autoevolutionary\FitnessMatchers\DefaultImplementation\AutoevolutionaryFitnessMatcherDefaultImplementationFabrik.cs" />
     <Compile Include="Implementations\Autoevolutionary\FitnessMatchers\Interface\IAutoEvolutionaryFitnessMatcherFabrik.cs" />

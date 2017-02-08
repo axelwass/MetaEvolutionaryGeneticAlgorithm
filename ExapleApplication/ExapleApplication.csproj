@@ -49,7 +49,8 @@
   <ItemGroup>
     <Compile Include="Examples\TravelSalesman\TravelSalesmanFitness.cs" />
     <Compile Include="Examples\TravelSalesman\TravelSalesmanIndividual.cs" />
-    <Compile Include="Examples\TravelSalesman\TravelSalesmanIndividualFabrik.cs" />
+    <Compile Include="Examples\TravelSalesman\TravelSalesmanSortIndividualFabrik.cs" />
+    <Compile Include="Examples\TravelSalesman\TravelSalesmanSwapIndividualFabrik.cs" />
     <Compile Include="Examples\TravelSalesman\TravelSalesmanScenario.cs" />
     <Compile Include="Examples\TravelSalesman\TravelSalesmanScenarioGenerator.cs" />
     <Compile Include="Program.cs" />

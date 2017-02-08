@@ -9,11 +9,11 @@ using MetaEvolutionaryGeneticAlgorithm.Common;
 
 namespace ExampleApplication.Examples.TravelSalesman
 {
-    class TravelSalesmanIndividualFabrik : IIndividualFabrik<TravelSalesmanIndividual>
+    class TravelSalesmanSwapIndividualFabrik : IIndividualFabrik<TravelSalesmanIndividual>
     {
         int Nodes;
 
-        public TravelSalesmanIndividualFabrik(int nodes)
+        public TravelSalesmanSwapIndividualFabrik(int nodes)
         {
             Nodes = nodes;
         }
@@ -40,7 +40,7 @@ namespace ExampleApplication.Examples.TravelSalesman
             var gens = new List<GenDescriptor>();
             for (int i = 0; i < Nodes; i++)
             {
-                gens.Add(new GenDescriptor(0, Nodes - 0.001f));
+                gens.Add(new GenDescriptor("Node swap with", 0, Nodes - 0.001f));
             }
             return gens;
         }

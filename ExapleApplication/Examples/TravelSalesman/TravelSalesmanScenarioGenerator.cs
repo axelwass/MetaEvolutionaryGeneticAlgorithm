@@ -24,7 +24,7 @@ namespace ExampleApplication.Examples.TravelSalesman
             {
                 for (int j = 0; j < Nodes; j++)
                 {
-                    DistancesVector[i, j] = DistancesVector[j, i] = RandomGenerator.getInstance().getRandom(0, maxPathLength);
+                    DistancesVector[i, j] = DistancesVector[j, i] = RandomGenerator.GetInstance().GetRandom(0, maxPathLength);
                 }
             }
 

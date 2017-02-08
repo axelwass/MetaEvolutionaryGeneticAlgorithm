@@ -15,7 +15,7 @@ namespace MetaEvolutionaryGeneticAlgorithm.Implementations.Autoevolutionary
         IFitness Fitness;
         Genome WarpedGenome;
         public T Individual;
-        AutoevolutionaryInformation EvolutionInformtaion;
+        public AutoevolutionaryInformation EvolutionInformtaion;
 
         public AutoEvolutionaryGenomeWarper(IIndividualFabrik<T> individualFabrik, AutoEvolutionaryInformationFabrik<U> autoEvolutionaryInformationFabrik, Genome genome, int initialLives)
         {
@@ -53,7 +53,7 @@ namespace MetaEvolutionaryGeneticAlgorithm.Implementations.Autoevolutionary
         public List<Genome> Apariate(AutoEvolutionaryGenomeWarper<T,U> other)
         {
             var newGenome = WarpedGenome.Apariate(0, other.WarpedGenome, EvolutionInformtaion.ApariateGenDominancePorcentage);
-            newGenome = newGenome.Mutate(0, EvolutionInformtaion.MutateGenChooseProbability, EvolutionInformtaion.MutateGenAmplitudePorcentage);
+            newGenome = newGenome.Mutate(EvolutionInformtaion.GetMutationType(), EvolutionInformtaion.MutateGenChooseProbability, EvolutionInformtaion.MutateGenAmplitudePorcentage);
             return new List<Genome> { newGenome };
         }
     }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using AlgoritmoGeneticoAutoevolutivo.GeneticOperators.Mutation;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace MetaEvolutionaryGeneticAlgorithm.BaseGeneticAlgorithm
@@ -18,7 +19,7 @@ namespace MetaEvolutionaryGeneticAlgorithm.BaseGeneticAlgorithm
 
         public Genome Mutate(int type, float choose_probability, float amplitude_porcentage)
         {
-            return new Genome(Descriptors, Gens.Select(g => g.Mutate(type, choose_probability, amplitude_porcentage)).ToList());
+            return new Genome(Descriptors, MutationManager.GetInstance().Mutate(type, Gens, choose_probability, amplitude_porcentage));
         }
 
         public Genome Apariate(int type, Genome other, float dominance_porcentage)

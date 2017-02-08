@@ -11,7 +11,7 @@ namespace AlgoritmoGeneticoAutoevolutivo.Common
         static RandomGenerator Instance = new RandomGenerator();
         Random RandomNumbers;
 
-        public static RandomGenerator getInstance()
+        public static RandomGenerator GetInstance()
         {
             return Instance;
         }
@@ -21,7 +21,7 @@ namespace AlgoritmoGeneticoAutoevolutivo.Common
             RandomNumbers = new Random();
         }
 
-        public float getRandom (float min, float max)
+        public float GetRandom (float min, float max)
         {
             return min + ((float)RandomNumbers.Next() / int.MaxValue) * (max - min);
         }

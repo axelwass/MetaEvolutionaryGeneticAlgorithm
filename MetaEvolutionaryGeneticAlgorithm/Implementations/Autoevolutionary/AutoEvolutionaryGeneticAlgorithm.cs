@@ -5,6 +5,7 @@ using System.Linq;
 using MetaEvolutionaryGeneticAlgorithm.BaseGeneticAlgorithm.Interface.GA;
 using MetaEvolutionaryGeneticAlgorithm.BaseGeneticAlgorithm.Interface.Problem;
 using MetaEvolutionaryGeneticAlgorithm.Implementations.Autoevolutionary.FitnessMAtcher.Interface;
+using AlgoritmoGeneticoAutoevolutivo.Common;
 
 namespace MetaEvolutionaryGeneticAlgorithm.Implementations.Autoevolutionary
 {
@@ -85,11 +86,10 @@ namespace MetaEvolutionaryGeneticAlgorithm.Implementations.Autoevolutionary
 
         private void ApariateGeneration()
         {
-            var rnd = new Random();
             var newGeneration = new List<AutoEvolutionaryGenomeWarper<T, U>>();
             foreach (var g in Generation)
             {
-                var mate = g.ChooseMate(Generation.OrderBy(x => rnd.Next()).Take(5).ToList());
+                var mate = g.ChooseMate(Generation.OrderBy(x => RandomGenerator.GetInstance().GetRandom(0,1)).Take(5).ToList());
                 newGeneration.AddRange(
                     g.Apariate(mate).Select(genome => new AutoEvolutionaryGenomeWarper<T,U>(IndividualFabrik,EvolutionaryInformationFabrik, genome, InitialLives))
                     );
