@@ -13,10 +13,5 @@ namespace MetaEvolutionaryGeneticAlgorithm.BaseGeneticAlgorithm
         }
 
         public Gen(GenDescriptor desc) : this(desc, desc.GetRandom()){}
-
-        public Gen Apariate(int type, Gen other, float dominancePorcentage)
-        {
-            return new Gen(Descriptor, Descriptor.Apariate(type, Value, other.Value, dominancePorcentage));
-        }
     }
 }

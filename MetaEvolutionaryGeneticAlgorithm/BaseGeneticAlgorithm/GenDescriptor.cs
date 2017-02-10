@@ -22,10 +22,5 @@ namespace MetaEvolutionaryGeneticAlgorithm.BaseGeneticAlgorithm
         {
             return RandomGenerator.GetInstance().GetRandom(Min,Max);
         }
-
-        public float Apariate(int type, float value1, float value2, float dominance_porcentage)
-        {
-            return RandomGenerator.GetInstance().GetRandom(0, 1) < dominance_porcentage ? value1 : value2;
-        }
     }
 }

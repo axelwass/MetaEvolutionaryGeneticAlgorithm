@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using MetaEvolutionaryGeneticAlgorithm.GeneticOperators.Apariation;
 
 namespace MetaEvolutionaryGeneticAlgorithm.BaseGeneticAlgorithm
 {
@@ -25,7 +26,7 @@ namespace MetaEvolutionaryGeneticAlgorithm.BaseGeneticAlgorithm
 
         public Genome Apariate(int type, Genome other, float dominance_porcentage)
         {
-            return new Genome(Descriptors, Gens.Zip(other.Gens, (g1, g2) => g1.Apariate(type, g2, dominance_porcentage)).ToList());
+            return new Genome(Descriptors, ApariationManager.GetInstance().Apariate(type, this.Gens, other.Gens, dominance_porcentage));
         }
 
         public List<Gen> GetGens()

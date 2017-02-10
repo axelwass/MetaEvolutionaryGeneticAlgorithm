@@ -13,6 +13,8 @@ using System.IO;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
+using MetaEvolutionaryGeneticAlgorithm.GeneticOperators.Apariation;
+using AlgoritmoGeneticoAutoevolutivo.GeneticOperators.Apariation.Implementations;
 
 namespace ExapleApplication
 {
@@ -50,6 +52,8 @@ namespace ExapleApplication
             MutationManager.GetInstance().Register(new ClassicMutationResolver());
             MutationManager.GetInstance().Register(new SwapMutationResolver());
 
+            ApariationManager.GetInstance().Register(new ClassicApariationResolver());
+
             var fitnessMatcherFabrik = new AutoevolutionaryFitnessMatcherDefaultImplementationFabrik();
 
             var GAInfo = new AutoevolutionaryGeneticAlgorithmParameters<TravelSalesmanIndividual, AutoevolutionaryFitnessMatcherDefaultImplementation>
@@ -80,7 +84,7 @@ namespace ExapleApplication
                 Console.Out.WriteLine("Best mutate amplitude: " + bestIndividual.EvolutionInformtaion.MutateGenAmplitudePorcentage);
                 Console.Out.WriteLine("AVG mutate choose prob: " + GA.Population.Average(o => o.EvolutionInformtaion.MutateGenChooseProbability));
                 Console.Out.WriteLine("Best mutate choose prob: " + bestIndividual.EvolutionInformtaion.MutateGenChooseProbability);
-                Console.Out.WriteLine("Best mutation type prob: " + bestIndividual.EvolutionInformtaion.TypeProbability[0] + ", " + bestIndividual.EvolutionInformtaion.TypeProbability[1]);
+                Console.Out.WriteLine("Best mutation type prob: " + bestIndividual.EvolutionInformtaion.MutationTypeProbability[0] + ", " + bestIndividual.EvolutionInformtaion.MutationTypeProbability[1]);
                 Console.Out.WriteLine("Actual Population: " + GA.Population.Count);
                 Console.Out.WriteLine("Best path: " + String.Join(",", bestIndividual.Individual.travelOrder));
                 Console.Out.WriteLine("Best fitness: " + bestIndividual.getNormalizedFitness());

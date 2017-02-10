@@ -50,6 +50,7 @@
     <Compile Include="Common\RandomGenerator.cs" />
     <Compile Include="GeneticOperators\Apariation\ApariationManager.cs" />
     <Compile Include="GeneticOperators\Apariation\IApariationResolver.cs" />
+    <Compile Include="GeneticOperators\Apariation\Implementations\ClassicApariationResolver.cs" />
     <Compile Include="GeneticOperators\Mutation\Implementations\ClassicMutationResolver.cs" />
     <Compile Include="GeneticOperators\Mutation\Implementations\SwapMutationResolver.cs" />
     <Compile Include="GeneticOperators\Mutation\MutationManager.cs" />
