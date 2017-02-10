@@ -5,46 +5,35 @@ using System.Linq;
 using MetaEvolutionaryGeneticAlgorithm.BaseGeneticAlgorithm.Interface.GA;
 using MetaEvolutionaryGeneticAlgorithm.BaseGeneticAlgorithm.Interface.Problem;
 using MetaEvolutionaryGeneticAlgorithm.Implementations.Autoevolutionary.FitnessMAtcher.Interface;
-using AlgoritmoGeneticoAutoevolutivo.Common;
+using MetaEvolutionaryGeneticAlgorithm.Common;
+using MetaEvolutionaryGeneticAlgorithm.Implementations.Autoevolutionary;
 
 namespace MetaEvolutionaryGeneticAlgorithm.Implementations.Autoevolutionary
 {
-    public class AutoEvolutionaryGeneticAlgorithm<T, U>: AGeneticAlgorithm<T, AutoEvolutionaryGenomeWarper<T,U>> where U : IAutoEvolutionaryFitnessMatcher
+    public class AutoEvolutionaryGeneticAlgorithm<T, U>: AGeneticAlgorithm<T, AutoevolutionaryGeneticAlgorithmParameters<T,U>, AutoEvolutionaryGenomeWarper<T,U>> where U : IAutoEvolutionaryFitnessMatcher
     {
-        private readonly int InitialLives;
-        private readonly int MaxPopulation;
-        private readonly float AprovedPorcentage;
-
-
-        AutoEvolutionaryInformationFabrik<U> EvolutionaryInformationFabrik;
         
-        public AutoEvolutionaryGeneticAlgorithm(IIndividualFabrik<T> individualFabrik, AutoEvolutionaryInformationFabrik<U> evolutionaryInformationFabrik, IEvaluationScenarioGenerator<T> scenarioGenerator, List<Genome> generation, int generationNumber,
-             int initialLives, float aprovedPorcentage, int maxPopulation)
-            : base( individualFabrik, scenarioGenerator)
+        public AutoEvolutionaryGeneticAlgorithm(AutoevolutionaryGeneticAlgorithmParameters<T, U> parameters, List<Genome> generation, int generationNumber)
+            : base(parameters)
         {
-            EvolutionaryInformationFabrik = evolutionaryInformationFabrik;
-            InitialLives = initialLives;
-            MaxPopulation = maxPopulation;
-            AprovedPorcentage = aprovedPorcentage;
-            Generation = generation.Select(g => new AutoEvolutionaryGenomeWarper<T,U>(individualFabrik, evolutionaryInformationFabrik, g, initialLives)).ToList();
+            Population = generation.Select(g => new AutoEvolutionaryGenomeWarper<T,U>(parameters.IndividualFabrik, parameters.EvolutionaryInformationFabrik, g, parameters.InitialLives)).ToList();
             GenerationNumber = generationNumber;
         }
 
-        static private List<Genome> GenerateInitialPopulation(IIndividualFabrik<T> individualFabrik, AutoEvolutionaryInformationFabrik<U> evolutionaryInformationFabrik, int initialPopulation)
+        static private List<Genome> GenerateInitialPopulation(AutoevolutionaryGeneticAlgorithmParameters<T, U> parameters)
         {
             var population = new List<Genome>();
-            for (int i = 0; i < initialPopulation; i++)
+            for (int i = 0; i < parameters.MaxPopulation; i++)
             {
-                var genDesc = individualFabrik.GetGeneticDescriptor();
-                genDesc.AddRange(evolutionaryInformationFabrik.GetGeneticDescriptor());
+                var genDesc = parameters.IndividualFabrik.GetGeneticDescriptor();
+                genDesc.AddRange(parameters.EvolutionaryInformationFabrik.GetGeneticDescriptor());
                 population.Add(new Genome(genDesc));
             }
             return population;
         }
         
-        public AutoEvolutionaryGeneticAlgorithm(IIndividualFabrik<T> individualFabrik, AutoEvolutionaryInformationFabrik<U> evolutionaryInformationFabrik,IEvaluationScenarioGenerator<T> scenarioGenerator,
-             int initialLives, float aprovedPorcentage, int initialPopulation, int maxPopulation)
-            : this(individualFabrik, evolutionaryInformationFabrik, scenarioGenerator, GenerateInitialPopulation(individualFabrik, evolutionaryInformationFabrik, initialPopulation), 0, initialLives, aprovedPorcentage, maxPopulation)
+        public AutoEvolutionaryGeneticAlgorithm(AutoevolutionaryGeneticAlgorithmParameters<T,U> parameters)
+            : this(parameters, GenerateInitialPopulation(parameters), 0)
         {}
 
         public override void AdvanceGenerations(int generations)
@@ -55,7 +44,7 @@ namespace MetaEvolutionaryGeneticAlgorithm.Implementations.Autoevolutionary
 
                 DisposeDeads();
             }
-            while (Generation.Count > MaxPopulation);
+            while (Population.Count > GeneticAlgorithmInformation.MaxPopulation);
 
 
             ApariateGeneration();
@@ -65,15 +54,15 @@ namespace MetaEvolutionaryGeneticAlgorithm.Implementations.Autoevolutionary
 
         private void ChallengesGeneration()
         {
-            var evaluationScenario = ScenarioGeneratior.GenerateEvaluationScenario();
+            var evaluationScenario = GeneticAlgorithmInformation.ScenarioGeneratior.GenerateEvaluationScenario();
             
-            foreach(var genomeWarper in Generation)
+            foreach(var genomeWarper in Population)
             {
                 genomeWarper.Challange(evaluationScenario);
             }
 
-            int aprovedNumber = (int)Math.Floor(Generation.Count * AprovedPorcentage);
-            foreach(var g in Generation.OrderBy(g => g.getNormalizedFitness()).Take(aprovedNumber))
+            int aprovedNumber = (int)Math.Floor(Population.Count * GeneticAlgorithmInformation.AprovedPorcentage);
+            foreach(var g in Population.OrderBy(g => g.getNormalizedFitness()).Take(aprovedNumber))
             {
                 g.looseLive();
             }
@@ -81,21 +70,21 @@ namespace MetaEvolutionaryGeneticAlgorithm.Implementations.Autoevolutionary
 
         private void DisposeDeads()
         {
-            Generation = Generation.Where(gw => !gw.isDead()).ToList();
+            Population = Population.Where(gw => !gw.isDead()).ToList();
         }
 
         private void ApariateGeneration()
         {
             var newGeneration = new List<AutoEvolutionaryGenomeWarper<T, U>>();
-            foreach (var g in Generation)
+            foreach (var g in Population)
             {
-                var mate = g.ChooseMate(Generation.OrderBy(x => RandomGenerator.GetInstance().GetRandom(0,1)).Take(5).ToList());
+                var mate = g.ChooseMate(Population.OrderBy(x => RandomGenerator.GetInstance().GetRandom(0,1)).Take(GeneticAlgorithmInformation.ApariateTournamentCount).ToList());
                 var childs = g.Apariate(mate).Where(child => !(child.MatchGenome(g.WarpedGenome) || child.MatchGenome(mate.WarpedGenome)));
                 newGeneration.AddRange(
-                    childs.Select(genome => new AutoEvolutionaryGenomeWarper<T,U>(IndividualFabrik,EvolutionaryInformationFabrik, genome, InitialLives))
+                    childs.Select(genome => new AutoEvolutionaryGenomeWarper<T,U>(GeneticAlgorithmInformation.IndividualFabrik, GeneticAlgorithmInformation.EvolutionaryInformationFabrik, genome, GeneticAlgorithmInformation.InitialLives))
                     );
             }
-            Generation.AddRange(newGeneration);
+            Population.AddRange(newGeneration);
         }
     }
 }

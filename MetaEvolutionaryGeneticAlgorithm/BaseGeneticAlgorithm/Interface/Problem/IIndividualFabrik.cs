@@ -10,6 +10,7 @@ namespace MetaEvolutionaryGeneticAlgorithm.BaseGeneticAlgorithm.Interface.Proble
     {
 
         List<GenDescriptor> GetGeneticDescriptor();
+        Genome GetRandomGenome();
         int GetGenCount();
         T Create(List<Gen> gens);
     }

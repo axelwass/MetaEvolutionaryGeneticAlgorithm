@@ -24,5 +24,10 @@ namespace MetaEvolutionaryGeneticAlgorithm.Implementations.Autoevolutionary.Fitn
         {
             return new List<GenDescriptor> { };
         }
+
+        public Genome GetRandomGenome()
+        {
+            return new Genome(GetGeneticDescriptor());
+        }
     }
 }

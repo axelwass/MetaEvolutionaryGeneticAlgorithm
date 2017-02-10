@@ -1,4 +1,4 @@
-﻿using AlgoritmoGeneticoAutoevolutivo.Common;
+﻿using MetaEvolutionaryGeneticAlgorithm.Common;
 using System;
 
 namespace MetaEvolutionaryGeneticAlgorithm.BaseGeneticAlgorithm

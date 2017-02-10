@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AlgoritmoGeneticoAutoevolutivo.GeneticOperators.Mutation
+namespace MetaEvolutionaryGeneticAlgorithm.GeneticOperators.Mutation
 {
     public interface IMutationResolver
     {

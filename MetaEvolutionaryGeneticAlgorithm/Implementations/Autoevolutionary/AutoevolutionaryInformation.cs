@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System;
 using System.Linq;
-using AlgoritmoGeneticoAutoevolutivo.Common;
+using MetaEvolutionaryGeneticAlgorithm.Common;
 
 namespace MetaEvolutionaryGeneticAlgorithm.Implementations.Autoevolutionary
 {

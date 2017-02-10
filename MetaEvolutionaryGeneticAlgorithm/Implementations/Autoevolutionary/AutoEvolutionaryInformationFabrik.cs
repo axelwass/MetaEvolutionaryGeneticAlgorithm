@@ -1,9 +1,10 @@
-﻿using AlgoritmoGeneticoAutoevolutivo.GeneticOperators.Mutation;
+﻿using MetaEvolutionaryGeneticAlgorithm.GeneticOperators.Mutation;
 using MetaEvolutionaryGeneticAlgorithm.BaseGeneticAlgorithm;
 using MetaEvolutionaryGeneticAlgorithm.BaseGeneticAlgorithm.Interface.Problem;
 using MetaEvolutionaryGeneticAlgorithm.Implementations.Autoevolutionary.FitnessMAtcher.Interface;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace MetaEvolutionaryGeneticAlgorithm.Implementations.Autoevolutionary
 {
@@ -29,6 +30,11 @@ namespace MetaEvolutionaryGeneticAlgorithm.Implementations.Autoevolutionary
             return descriptor;
         }
 
+        public Genome GetRandomGenome()
+        {
+            return new Genome(GetGeneticDescriptor());
+        }
+
         public int GetGenCount()
         {
             return AutoEvolutionaryInformationGeneticDescriptor.Count + MutationManager.GetInstance().GetMutationTypes() + FitnessMatcherFabrik.GetGenCount();
@@ -43,5 +49,6 @@ namespace MetaEvolutionaryGeneticAlgorithm.Implementations.Autoevolutionary
                 gens[2].Value, 
                 gens.Skip(3).Take(MutationManager.GetInstance().GetMutationTypes()).Select(o => o.Value).ToList());
         }
+
     }
 }

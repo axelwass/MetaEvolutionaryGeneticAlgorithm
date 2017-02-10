@@ -44,5 +44,11 @@ namespace ExapleApplication.Examples.TravelSalesman
             }
             return gens;
         }
+
+
+        public Genome GetRandomGenome()
+        {
+            return new Genome(GetGeneticDescriptor());
+        }
     }
 }

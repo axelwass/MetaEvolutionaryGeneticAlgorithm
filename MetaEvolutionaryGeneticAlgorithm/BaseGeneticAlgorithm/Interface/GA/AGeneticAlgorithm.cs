@@ -3,18 +3,16 @@ using System.Collections.Generic;
 
 namespace MetaEvolutionaryGeneticAlgorithm.BaseGeneticAlgorithm.Interface.GA
 {
-    public abstract class AGeneticAlgorithm<T, V> where V:IGenomeWarper<T, V>
+    public abstract class AGeneticAlgorithm<T, U, V> where V:IGenomeWarper<T, V> where U : GeneticAlgorithmInformation<T>
     {
         public int GenerationNumber;
-        protected IIndividualFabrik<T> IndividualFabrik;
-        protected IEvaluationScenarioGenerator<T> ScenarioGeneratior;
+        protected U GeneticAlgorithmInformation;
 
-        public List<V> Generation { get; protected set; }
+        public List<V> Population { get; protected set; }
 
-        public AGeneticAlgorithm(IIndividualFabrik<T> individualFabrik, IEvaluationScenarioGenerator<T> scenarioGenerator)
+        public AGeneticAlgorithm(U geneticAlgorithmInformation)
         {
-            IndividualFabrik = individualFabrik;
-            ScenarioGeneratior = scenarioGenerator;
+            GeneticAlgorithmInformation = geneticAlgorithmInformation;
         }
 
         abstract public void AdvanceGenerations(int generations);

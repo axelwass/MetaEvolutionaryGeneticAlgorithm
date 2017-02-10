@@ -1,4 +1,4 @@
-﻿using AlgoritmoGeneticoAutoevolutivo.Common;
+﻿using MetaEvolutionaryGeneticAlgorithm.Common;
 using MetaEvolutionaryGeneticAlgorithm.BaseGeneticAlgorithm.Interface.Problem;
 using System;
 using System.Collections.Generic;

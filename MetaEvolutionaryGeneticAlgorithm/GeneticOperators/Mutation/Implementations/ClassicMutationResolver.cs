@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MetaEvolutionaryGeneticAlgorithm.BaseGeneticAlgorithm;
-using AlgoritmoGeneticoAutoevolutivo.Common;
+using MetaEvolutionaryGeneticAlgorithm.Common;
 
-namespace AlgoritmoGeneticoAutoevolutivo.GeneticOperators.Mutation.Implementations
+namespace MetaEvolutionaryGeneticAlgorithm.GeneticOperators.Mutation.Implementations
 {
     public class ClassicMutationResolver : IMutationResolver
     {

@@ -1,4 +1,4 @@
-﻿using AlgoritmoGeneticoAutoevolutivo.GeneticOperators.Mutation;
+﻿using MetaEvolutionaryGeneticAlgorithm.GeneticOperators.Mutation;
 using System.Collections.Generic;
 using System.Linq;
 using System;

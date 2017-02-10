@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AlgoritmoGeneticoAutoevolutivo.Common
+namespace MetaEvolutionaryGeneticAlgorithm.Common
 {
     public class RandomGenerator
     {
