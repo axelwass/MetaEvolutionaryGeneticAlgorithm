@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using MetaEvolutionaryGeneticAlgorithm.BaseGeneticAlgorithm;
 using MetaEvolutionaryGeneticAlgorithm.Common;
-using MetaEvolutionaryGeneticAlgorithm.Common;
 
 namespace MetaEvolutionaryGeneticAlgorithm.GeneticOperators.Mutation.Implementations
 {

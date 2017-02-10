@@ -22,12 +22,21 @@ namespace MetaEvolutionaryGeneticAlgorithm.Implementations.Autoevolutionary
 
         static private List<Genome> GenerateInitialPopulation(AutoevolutionaryGeneticAlgorithmParameters<T, U> parameters)
         {
+            return GeneratePopulation(parameters, parameters.MaxPopulation);
+        }
+
+        static private List<Genome> GeneratePopulation(AutoevolutionaryGeneticAlgorithmParameters<T, U> parameters, int cant)
+        {
             var population = new List<Genome>();
             for (int i = 0; i < parameters.MaxPopulation; i++)
             {
                 var genDesc = parameters.IndividualFabrik.GetGeneticDescriptor();
                 genDesc.AddRange(parameters.EvolutionaryInformationFabrik.GetGeneticDescriptor());
-                population.Add(new Genome(genDesc));
+
+                var gens = parameters.IndividualFabrik.GetRandomGenList();
+                gens.AddRange(parameters.EvolutionaryInformationFabrik.GetRandomGenList());
+
+                population.Add(new Genome(genDesc,gens));
             }
             return population;
         }
@@ -38,31 +47,41 @@ namespace MetaEvolutionaryGeneticAlgorithm.Implementations.Autoevolutionary
 
         public override void AdvanceGenerations(int generations)
         {
-            do
+            while (Population.Count > GeneticAlgorithmInformation.MaxPopulation)
             {
-                ChallengesGeneration();
+                Tournament();
 
                 DisposeDeads();
             }
-            while (Population.Count > GeneticAlgorithmInformation.MaxPopulation);
 
 
             ApariateGeneration();
 
+            AddForeingers();
+
             GenerationNumber++;
         }
 
-        private void ChallengesGeneration()
+        private void AddForeingers()
+        {
+            var foreingersGenome = GeneratePopulation(GeneticAlgorithmInformation, GeneticAlgorithmInformation.ForeingersByGeneration);
+            var foreingers = foreingersGenome.Select(g => new AutoEvolutionaryGenomeWarper<T, U>(GeneticAlgorithmInformation.IndividualFabrik, GeneticAlgorithmInformation.EvolutionaryInformationFabrik, g, GeneticAlgorithmInformation.InitialLives)).ToList();
+
+            Population.AddRange(foreingers);
+        }
+
+        private void Tournament()
         {
             var evaluationScenario = GeneticAlgorithmInformation.ScenarioGeneratior.GenerateEvaluationScenario();
-            
-            foreach(var genomeWarper in Population)
+
+            var tournament = Population.OrderBy(x => RandomGenerator.GetInstance().GetRandom(0, 1)).Take(GeneticAlgorithmInformation.DeathTournamentCount).ToList();
+            foreach (var competitor in tournament)
             {
-                genomeWarper.Challange(evaluationScenario);
+                competitor.Challange(evaluationScenario);
             }
 
-            int aprovedNumber = (int)Math.Floor(Population.Count * GeneticAlgorithmInformation.AprovedPorcentage);
-            foreach(var g in Population.OrderBy(g => g.getNormalizedFitness()).Take(aprovedNumber))
+            int aprovedNumber = (int)Math.Floor(tournament.Count * GeneticAlgorithmInformation.AprovedPorcentage);
+            foreach(var g in tournament.OrderBy(g => 1 - g.getNormalizedFitness()).Skip(aprovedNumber))
             {
                 g.looseLive();
             }
@@ -78,8 +97,14 @@ namespace MetaEvolutionaryGeneticAlgorithm.Implementations.Autoevolutionary
             var newGeneration = new List<AutoEvolutionaryGenomeWarper<T, U>>();
             foreach (var g in Population)
             {
-                var mate = g.ChooseMate(Population.OrderBy(x => RandomGenerator.GetInstance().GetRandom(0,1)).Take(GeneticAlgorithmInformation.ApariateTournamentCount).ToList());
-                var childs = g.Apariate(mate).Where(child => !(child.MatchGenome(g.WarpedGenome) || child.MatchGenome(mate.WarpedGenome)));
+                var evaluationScenario = GeneticAlgorithmInformation.ScenarioGeneratior.GenerateEvaluationScenario();
+                var posibleMates = Population.OrderBy(x => RandomGenerator.GetInstance().GetRandom(0, 1)).Take(GeneticAlgorithmInformation.ApariateTournamentCount).ToList();
+                foreach(var mate in posibleMates)
+                {
+                    mate.Challange(evaluationScenario);
+                }
+                var chosenmMate = g.ChooseMate(posibleMates);
+                var childs = g.Apariate(chosenmMate).Where(child => !(child.MatchGenome(g.WarpedGenome) || child.MatchGenome(chosenmMate.WarpedGenome)));
                 newGeneration.AddRange(
                     childs.Select(genome => new AutoEvolutionaryGenomeWarper<T,U>(GeneticAlgorithmInformation.IndividualFabrik, GeneticAlgorithmInformation.EvolutionaryInformationFabrik, genome, GeneticAlgorithmInformation.InitialLives))
                     );

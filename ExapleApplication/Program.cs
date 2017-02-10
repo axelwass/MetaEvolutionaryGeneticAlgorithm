@@ -23,7 +23,7 @@ namespace ExapleApplication
             byte[] fileContet;
             using (WebClient client = new WebClient())
             {
-                fileContet = client.DownloadData("http://people.sc.fsu.edu/~jburkardt/datasets/tsp/dantzig42_d.txt");
+                fileContet = client.DownloadData("http://people.sc.fsu.edu/~jburkardt/datasets/tsp/att48_d.txt");
             }
             String input = Encoding.UTF8.GetString(fileContet).Trim();
 
@@ -61,14 +61,15 @@ namespace ExapleApplication
                 InitialLives = 3,
                 AprovedPorcentage = 0.5f,
                 ApariateTournamentCount = 5,
-                DeathTournamentCount = 6
+                DeathTournamentCount = 6,
+                ForeingersByGeneration = 10
             };
 
             var GA = new AutoEvolutionaryGeneticAlgorithm<TravelSalesmanIndividual, AutoevolutionaryFitnessMatcherDefaultImplementation>(GAInfo);
 
             //Console.Out.WriteLine(Arrays.PrettyPrintMatrix<float>(scenarioGenerator.DistancesVector));
 
-            for (int g = 0; g < 1000; g++)
+            for (int g = 0; g < 5000; g++)
             {
                 GA.AdvanceGenerations(1);
                 var bestIndividual = GA.Population.MaxBy(o => o.getNormalizedFitness());

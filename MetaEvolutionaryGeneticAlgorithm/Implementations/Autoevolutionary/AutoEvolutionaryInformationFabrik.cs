@@ -30,9 +30,9 @@ namespace MetaEvolutionaryGeneticAlgorithm.Implementations.Autoevolutionary
             return descriptor;
         }
 
-        public Genome GetRandomGenome()
+        public List<Gen> GetRandomGenList()
         {
-            return new Genome(GetGeneticDescriptor());
+            return GetGeneticDescriptor().Select(gd => new Gen(gd)).ToList();
         }
 
         public int GetGenCount()

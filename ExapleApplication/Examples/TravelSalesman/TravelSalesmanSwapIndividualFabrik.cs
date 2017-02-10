@@ -44,10 +44,10 @@ namespace ExampleApplication.Examples.TravelSalesman
             }
             return gens;
         }
-        
-        public Genome GetRandomGenome()
+
+        public List<Gen> GetRandomGenList()
         {
-            return new Genome(GetGeneticDescriptor());
+            return GetGeneticDescriptor().Select(gd => new Gen(gd)).ToList();
         }
     }
 }

@@ -18,6 +18,6 @@ namespace MetaEvolutionaryGeneticAlgorithm.Implementations.Autoevolutionary
         public int MaxPopulation;
         public int DeathTournamentCount;
         public int ApariateTournamentCount;
-
+        public int ForeingersByGeneration;
     }
 }
