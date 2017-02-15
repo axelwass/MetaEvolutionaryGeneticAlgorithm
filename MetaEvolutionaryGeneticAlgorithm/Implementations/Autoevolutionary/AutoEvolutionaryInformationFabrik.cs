@@ -27,7 +27,7 @@ namespace MetaEvolutionaryGeneticAlgorithm.Implementations.Autoevolutionary
         {
             var descriptor = AutoEvolutionaryInformationGeneticDescriptor.ToList();
             descriptor.AddRange(Enumerable.Repeat(new GenDescriptor("Mutation type prob",0, 1, 0.001f), MutationManager.GetInstance().GetMutationTypes()));
-            descriptor.AddRange(Enumerable.Repeat(new GenDescriptor("Apariation type prob", 0, 1, 0.001f), MutationManager.GetInstance().GetMutationTypes()));
+            descriptor.AddRange(Enumerable.Repeat(new GenDescriptor("Apariation type prob", 0, 1, 0.001f), CrossOverManager.GetInstance().GetCrossOverTypes()));
             descriptor.AddRange(FitnessMatcherFabrik.GetGeneticDescriptor());
             return descriptor;
         }

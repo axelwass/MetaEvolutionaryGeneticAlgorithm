@@ -26,7 +26,7 @@ namespace ExapleApplication
             byte[] fileContet;
             using (WebClient client = new WebClient())
             {
-                fileContet = client.DownloadData("http://people.sc.fsu.edu/~jburkardt/datasets/tsp/att48_d.txt");
+                fileContet = client.DownloadData("http://people.sc.fsu.edu/~jburkardt/datasets/tsp/p01_d.txt");
             }
             String input = Encoding.UTF8.GetString(fileContet).Trim();
 
@@ -56,6 +56,7 @@ namespace ExapleApplication
             MutationManager.GetInstance().Register(new DividedMutation(nodes, new SwapMutationResolver(), new ClassicMutationResolver()));
 
             CrossOverManager.GetInstance().Register(new DividedCrossOver(nodes, new PMXCrossOver(), new ClassicCrossOverResolver()));
+            CrossOverManager.GetInstance().Register(new DividedCrossOver(nodes, new CycleCrossOver(), new ClassicCrossOverResolver()));
 
             var fitnessMatcherFabrik = new AutoevolutionaryFitnessMatcherDefaultImplementationFabrik();
 
@@ -81,13 +82,14 @@ namespace ExapleApplication
                 GA.AdvanceGenerations(1);
                 var bestIndividual = GA.Population.MaxBy(o => o.getNormalizedFitness());
                 Console.Out.WriteLine("Generation: " + GA.GenerationNumber);
-                Console.Out.WriteLine("AVG apariate dominance porcentage: " + GA.Population.Average(o => o.EvolutionInformtaion.ApariateGenDominancePorcentage));
-                Console.Out.WriteLine("Best apariate dominance porcentage: " + bestIndividual.EvolutionInformtaion.ApariateGenDominancePorcentage);
+                Console.Out.WriteLine("AVG apariate dominance porcentage: " + GA.Population.Average(o => o.EvolutionInformtaion.CrossOverGenDominancePorcentage));
+                Console.Out.WriteLine("Best apariate dominance porcentage: " + bestIndividual.EvolutionInformtaion.CrossOverGenDominancePorcentage);
                 Console.Out.WriteLine("AVG mutate amplitude: " + GA.Population.Average(o => o.EvolutionInformtaion.MutateGenAmplitudePorcentage));
                 Console.Out.WriteLine("Best mutate amplitude: " + bestIndividual.EvolutionInformtaion.MutateGenAmplitudePorcentage);
                 Console.Out.WriteLine("AVG mutate choose prob: " + GA.Population.Average(o => o.EvolutionInformtaion.MutateGenChooseProbability));
                 Console.Out.WriteLine("Best mutate choose prob: " + bestIndividual.EvolutionInformtaion.MutateGenChooseProbability);
                 Console.Out.WriteLine("Best mutation type prob: " + bestIndividual.EvolutionInformtaion.MutationTypeProbability[0]);
+                Console.Out.WriteLine("Best crossover type prob: " + bestIndividual.EvolutionInformtaion.CrossOverTypeProbability[0] + ", " + bestIndividual.EvolutionInformtaion.CrossOverTypeProbability[1]);
                 Console.Out.WriteLine("Actual Population: " + GA.Population.Count);
                 Console.Out.WriteLine("Best path: " + String.Join(",", bestIndividual.Individual.travelOrder));
                 Console.Out.WriteLine("Best fitness: " + bestIndividual.getNormalizedFitness());

@@ -55,7 +55,7 @@ namespace MetaEvolutionaryGeneticAlgorithm.Implementations.Autoevolutionary
             List<Genome> children = new List<Genome>();
             for(int i=0; i<3; i++)
             {
-                var child = WarpedGenome.Cross(EvolutionInformtaion.GetApariationType(), other.WarpedGenome, EvolutionInformtaion.ApariateGenDominancePorcentage);
+                var child = WarpedGenome.Cross(EvolutionInformtaion.GetApariationType(), other.WarpedGenome, EvolutionInformtaion.CrossOverGenDominancePorcentage);
                 child = child.Mutate(EvolutionInformtaion.GetMutationType(), EvolutionInformtaion.MutateGenChooseProbability, EvolutionInformtaion.MutateGenAmplitudePorcentage);
                 children.Add(child);
             }

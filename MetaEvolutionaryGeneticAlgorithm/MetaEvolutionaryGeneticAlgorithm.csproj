@@ -51,6 +51,7 @@
     <Compile Include="GeneticOperators\CrossOver\CrossOverManager.cs" />
     <Compile Include="GeneticOperators\CrossOver\ICrossOverResolver.cs" />
     <Compile Include="GeneticOperators\CrossOver\Implementations\ClassicCrossOverResolver.cs" />
+    <Compile Include="GeneticOperators\CrossOver\Implementations\CycleCrossOver.cs" />
     <Compile Include="GeneticOperators\CrossOver\Implementations\DividedCrossOver.cs" />
     <Compile Include="GeneticOperators\CrossOver\Implementations\PMXCrossOver.cs" />
     <Compile Include="GeneticOperators\Mutation\Implementations\ClassicMutationResolver.cs" />

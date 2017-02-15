@@ -11,19 +11,19 @@ namespace MetaEvolutionaryGeneticAlgorithm.Implementations.Autoevolutionary
         public IAutoEvolutionaryFitnessMatcher FitnessMatcher { get; }
         public float MutateGenChooseProbability { get; }
         public float MutateGenAmplitudePorcentage { get; }
-        public float ApariateGenDominancePorcentage { get; }
+        public float CrossOverGenDominancePorcentage { get; }
 
         public List<float> MutationTypeProbability;
-        public List<float> ApariationTypeProbability;
+        public List<float> CrossOverTypeProbability;
 
         public AutoevolutionaryInformation(IAutoEvolutionaryFitnessMatcher fitnessMatcher, float chooseProbability, float amplitudePorcentage, float dominancePorcentage, List<float> mutationTypeProbabilit, List<float> apariationTypeProbabilit)
         {
             FitnessMatcher = fitnessMatcher;
             MutateGenChooseProbability = chooseProbability;
             MutateGenAmplitudePorcentage = amplitudePorcentage;
-            ApariateGenDominancePorcentage = dominancePorcentage;
+            CrossOverGenDominancePorcentage = dominancePorcentage;
             MutationTypeProbability = mutationTypeProbabilit;
-            ApariationTypeProbability = apariationTypeProbabilit;
+            CrossOverTypeProbability = apariationTypeProbabilit;
         }
 
         internal int GetMutationType()
@@ -46,11 +46,11 @@ namespace MetaEvolutionaryGeneticAlgorithm.Implementations.Autoevolutionary
 
         internal int GetApariationType()
         {
-            float total = ApariationTypeProbability.Sum();
+            float total = CrossOverTypeProbability.Sum();
             float selector = RandomGenerator.GetInstance().GetRandom(0, total);
             float sum = 0;
             int index = 0;
-            foreach (float prov in ApariationTypeProbability)
+            foreach (float prov in CrossOverTypeProbability)
             {
                 sum += prov;
                 if (sum >= selector)
