@@ -48,10 +48,13 @@
     <Compile Include="Common\Arrays.cs" />
     <Compile Include="Common\IListExtensions.cs" />
     <Compile Include="Common\RandomGenerator.cs" />
-    <Compile Include="GeneticOperators\Apariation\ApariationManager.cs" />
-    <Compile Include="GeneticOperators\Apariation\IApariationResolver.cs" />
-    <Compile Include="GeneticOperators\Apariation\Implementations\ClassicApariationResolver.cs" />
+    <Compile Include="GeneticOperators\CrossOver\CrossOverManager.cs" />
+    <Compile Include="GeneticOperators\CrossOver\ICrossOverResolver.cs" />
+    <Compile Include="GeneticOperators\CrossOver\Implementations\ClassicCrossOverResolver.cs" />
+    <Compile Include="GeneticOperators\CrossOver\Implementations\DividedCrossOver.cs" />
+    <Compile Include="GeneticOperators\CrossOver\Implementations\PMXCrossOver.cs" />
     <Compile Include="GeneticOperators\Mutation\Implementations\ClassicMutationResolver.cs" />
+    <Compile Include="GeneticOperators\Mutation\Implementations\DividedMutation.cs" />
     <Compile Include="GeneticOperators\Mutation\Implementations\SwapMutationResolver.cs" />
     <Compile Include="GeneticOperators\Mutation\MutationManager.cs" />
     <Compile Include="GeneticOperators\Mutation\IMutationResolver.cs" />

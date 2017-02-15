@@ -44,9 +44,12 @@ namespace ExapleApplication.Examples.TravelSalesman
             int i = 0;
             var gens = GetGeneticDescriptor().Select(gd => new Gen(gd, i++)).ToList();
 
-            int swapindex1 = (int)RandomGenerator.GetInstance().GetRandom(0, Nodes);
-            int swapindex2 = (int)RandomGenerator.GetInstance().GetRandom(0, Nodes);
-            gens.Swap(swapindex1, swapindex2);
+            for(int j = 0; j < Nodes * 2; j++)
+            {
+                int swapindex1 = (int)RandomGenerator.GetInstance().GetRandom(0, Nodes - 0.0001f);
+                int swapindex2 = (int)RandomGenerator.GetInstance().GetRandom(0, Nodes - 0.0001f);
+                gens.Swap(swapindex1, swapindex2);
+            }
 
             return gens;
         }

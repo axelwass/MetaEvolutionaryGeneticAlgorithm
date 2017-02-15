@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System;
-using MetaEvolutionaryGeneticAlgorithm.GeneticOperators.Apariation;
+using MetaEvolutionaryGeneticAlgorithm.GeneticOperators.CrossOver;
 
 namespace MetaEvolutionaryGeneticAlgorithm.BaseGeneticAlgorithm
 {
@@ -24,9 +24,9 @@ namespace MetaEvolutionaryGeneticAlgorithm.BaseGeneticAlgorithm
             return new Genome(Descriptors, MutationManager.GetInstance().Mutate(type, Gens, choose_probability, amplitude_porcentage));
         }
 
-        public Genome Apariate(int type, Genome other, float dominance_porcentage)
+        public Genome Cross(int type, Genome other, float dominance_porcentage)
         {
-            return new Genome(Descriptors, ApariationManager.GetInstance().Apariate(type, this.Gens, other.Gens, dominance_porcentage));
+            return new Genome(Descriptors, CrossOverManager.GetInstance().Cross(type, this.Gens, other.Gens, dominance_porcentage));
         }
 
         public List<Gen> GetGens()

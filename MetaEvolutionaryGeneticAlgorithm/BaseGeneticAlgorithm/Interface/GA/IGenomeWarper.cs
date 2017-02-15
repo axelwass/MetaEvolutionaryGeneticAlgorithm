@@ -5,7 +5,7 @@ namespace MetaEvolutionaryGeneticAlgorithm.BaseGeneticAlgorithm.Interface.GA
 {
     public interface IGenomeWarper<T, U> where U : IGenomeWarper<T,U>
     {
-        List<Genome> Apariate(U other);
+        List<Genome> Cross(U other);
         void Challange(IEvaluationScenario<T> evalluationScenario);
     }
 }

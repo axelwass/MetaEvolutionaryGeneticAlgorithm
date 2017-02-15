@@ -55,7 +55,7 @@ namespace MetaEvolutionaryGeneticAlgorithm.Implementations.Autoevolutionary
             }
 
 
-            ApariateGeneration();
+            CrossOverGeneration();
 
             AddForeingers();
 
@@ -92,7 +92,7 @@ namespace MetaEvolutionaryGeneticAlgorithm.Implementations.Autoevolutionary
             Population = Population.Where(gw => !gw.isDead()).ToList();
         }
 
-        private void ApariateGeneration()
+        private void CrossOverGeneration()
         {
             var newGeneration = new List<AutoEvolutionaryGenomeWarper<T, U>>();
             foreach (var g in Population)
@@ -104,7 +104,7 @@ namespace MetaEvolutionaryGeneticAlgorithm.Implementations.Autoevolutionary
                     mate.Challange(evaluationScenario);
                 }
                 var chosenmMate = g.ChooseMate(posibleMates);
-                var childs = g.Apariate(chosenmMate).Where(child => !(child.MatchGenome(g.WarpedGenome) || child.MatchGenome(chosenmMate.WarpedGenome)));
+                var childs = g.Cross(chosenmMate).Where(child => !(child.MatchGenome(g.WarpedGenome) || child.MatchGenome(chosenmMate.WarpedGenome)));
                 newGeneration.AddRange(
                     childs.Select(genome => new AutoEvolutionaryGenomeWarper<T,U>(GeneticAlgorithmInformation.IndividualFabrik, GeneticAlgorithmInformation.EvolutionaryInformationFabrik, genome, GeneticAlgorithmInformation.InitialLives))
                     );

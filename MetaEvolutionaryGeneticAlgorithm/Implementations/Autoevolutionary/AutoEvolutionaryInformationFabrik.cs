@@ -5,7 +5,7 @@ using MetaEvolutionaryGeneticAlgorithm.Implementations.Autoevolutionary.FitnessM
 using System.Collections.Generic;
 using System.Linq;
 using System;
-using MetaEvolutionaryGeneticAlgorithm.GeneticOperators.Apariation;
+using MetaEvolutionaryGeneticAlgorithm.GeneticOperators.CrossOver;
 
 namespace MetaEvolutionaryGeneticAlgorithm.Implementations.Autoevolutionary
 {
@@ -39,18 +39,18 @@ namespace MetaEvolutionaryGeneticAlgorithm.Implementations.Autoevolutionary
 
         public int GetGenCount()
         {
-            return AutoEvolutionaryInformationGeneticDescriptor.Count + MutationManager.GetInstance().GetMutationTypes() + ApariationManager.GetInstance().GetApariationTypes() + FitnessMatcherFabrik.GetGenCount();
+            return AutoEvolutionaryInformationGeneticDescriptor.Count + MutationManager.GetInstance().GetMutationTypes() + CrossOverManager.GetInstance().GetCrossOverTypes() + FitnessMatcherFabrik.GetGenCount();
         }
 
         public AutoevolutionaryInformation Create(List<Gen> gens)
         {
             return new AutoevolutionaryInformation(
-                FitnessMatcherFabrik.Create(gens.Skip(AutoEvolutionaryInformationGeneticDescriptor.Count + MutationManager.GetInstance().GetMutationTypes() + ApariationManager.GetInstance().GetApariationTypes()).ToList()), 
+                FitnessMatcherFabrik.Create(gens.Skip(AutoEvolutionaryInformationGeneticDescriptor.Count + MutationManager.GetInstance().GetMutationTypes() + CrossOverManager.GetInstance().GetCrossOverTypes()).ToList()), 
                 gens[0].Value, 
                 gens[1].Value, 
                 gens[2].Value, 
                 gens.Skip(3).Take(MutationManager.GetInstance().GetMutationTypes()).Select(o => o.Value).ToList(),
-                gens.Skip(3 + MutationManager.GetInstance().GetMutationTypes()).Take(ApariationManager.GetInstance().GetApariationTypes()).Select(o => o.Value).ToList());
+                gens.Skip(3 + MutationManager.GetInstance().GetMutationTypes()).Take(CrossOverManager.GetInstance().GetCrossOverTypes()).Select(o => o.Value).ToList());
         }
 
     }

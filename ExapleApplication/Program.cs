@@ -13,8 +13,9 @@ using System.IO;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
-using MetaEvolutionaryGeneticAlgorithm.GeneticOperators.Apariation;
-using AlgoritmoGeneticoAutoevolutivo.GeneticOperators.Apariation.Implementations;
+using MetaEvolutionaryGeneticAlgorithm.GeneticOperators.CrossOver;
+using AlgoritmoGeneticoAutoevolutivo.GeneticOperators.CrossOver.Implementations;
+using AlgoritmoGeneticoAutoevolutivo.GeneticOperators.Mutation.Implementations;
 
 namespace ExapleApplication
 {
@@ -49,16 +50,18 @@ namespace ExapleApplication
             }
             int nodes = rows.Length;
 
-            MutationManager.GetInstance().Register(new ClassicMutationResolver());
-            MutationManager.GetInstance().Register(new SwapMutationResolver());
+            //MutationManager.GetInstance().Register(new ClassicMutationResolver());
+            //MutationManager.GetInstance().Register(new SwapMutationResolver());
 
-            ApariationManager.GetInstance().Register(new ClassicApariationResolver());
+            MutationManager.GetInstance().Register(new DividedMutation(nodes, new SwapMutationResolver(), new ClassicMutationResolver()));
+
+            CrossOverManager.GetInstance().Register(new DividedCrossOver(nodes, new PMXCrossOver(), new ClassicCrossOverResolver()));
 
             var fitnessMatcherFabrik = new AutoevolutionaryFitnessMatcherDefaultImplementationFabrik();
 
             var GAInfo = new AutoevolutionaryGeneticAlgorithmParameters<TravelSalesmanIndividual, AutoevolutionaryFitnessMatcherDefaultImplementation>
             {
-                IndividualFabrik = new TravelSalesmanSortIndividualFabrik(nodes),
+                IndividualFabrik = new TravelSalesmanPathIndividualFabrik(nodes),
                 ScenarioGeneratior = new TravelSalesmanScenarioGenerator(distancesVector, nodes, maxPathLength),
                 EvolutionaryInformationFabrik = new AutoEvolutionaryInformationFabrik<AutoevolutionaryFitnessMatcherDefaultImplementation>(fitnessMatcherFabrik),
                 MaxPopulation = 100,
@@ -84,7 +87,7 @@ namespace ExapleApplication
                 Console.Out.WriteLine("Best mutate amplitude: " + bestIndividual.EvolutionInformtaion.MutateGenAmplitudePorcentage);
                 Console.Out.WriteLine("AVG mutate choose prob: " + GA.Population.Average(o => o.EvolutionInformtaion.MutateGenChooseProbability));
                 Console.Out.WriteLine("Best mutate choose prob: " + bestIndividual.EvolutionInformtaion.MutateGenChooseProbability);
-                Console.Out.WriteLine("Best mutation type prob: " + bestIndividual.EvolutionInformtaion.MutationTypeProbability[0] + ", " + bestIndividual.EvolutionInformtaion.MutationTypeProbability[1]);
+                Console.Out.WriteLine("Best mutation type prob: " + bestIndividual.EvolutionInformtaion.MutationTypeProbability[0]);
                 Console.Out.WriteLine("Actual Population: " + GA.Population.Count);
                 Console.Out.WriteLine("Best path: " + String.Join(",", bestIndividual.Individual.travelOrder));
                 Console.Out.WriteLine("Best fitness: " + bestIndividual.getNormalizedFitness());

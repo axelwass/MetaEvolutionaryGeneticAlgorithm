@@ -50,12 +50,12 @@ namespace MetaEvolutionaryGeneticAlgorithm.Implementations.Autoevolutionary
             return others.MaxBy(o => EvolutionInformtaion.FitnessMatcher.Match(Fitness, o.Fitness));
         }
 
-        public List<Genome> Apariate(AutoEvolutionaryGenomeWarper<T,U> other)
+        public List<Genome> Cross(AutoEvolutionaryGenomeWarper<T,U> other)
         {
             List<Genome> children = new List<Genome>();
             for(int i=0; i<3; i++)
             {
-                var child = WarpedGenome.Apariate(EvolutionInformtaion.GetApariationType(), other.WarpedGenome, EvolutionInformtaion.ApariateGenDominancePorcentage);
+                var child = WarpedGenome.Cross(EvolutionInformtaion.GetApariationType(), other.WarpedGenome, EvolutionInformtaion.ApariateGenDominancePorcentage);
                 child = child.Mutate(EvolutionInformtaion.GetMutationType(), EvolutionInformtaion.MutateGenChooseProbability, EvolutionInformtaion.MutateGenAmplitudePorcentage);
                 children.Add(child);
             }
